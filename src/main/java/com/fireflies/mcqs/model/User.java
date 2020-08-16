@@ -19,17 +19,25 @@ public class User implements Serializable {
     @Transient
     private String passwordConfirm;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
+
+//    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+//    private Set<Role> roles;
     @NotEmpty
     @Column(name = "full_name", nullable = false)
     private String fullName;
 
     @NotEmpty
-    @Column(name = "EMAIL", nullable = false)
+//    @Column(name = "EMAIL", nullable = false)
     private String email;
 
+//    @NotEmpty
+    private boolean enable;
+
+    private String phone;
 
     public Integer getId() {
         return id;
@@ -90,4 +98,30 @@ public class User implements Serializable {
     }
 
 
+    public boolean isAccountEnabled()    {
+        return enable;
+    }
+    public void setAccountEnabled(boolean enable) {
+         this.enable = enable;
+    }
+
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 }
