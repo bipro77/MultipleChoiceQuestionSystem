@@ -11,7 +11,7 @@
     <groupId>com.fireflies</groupId>
     <artifactId>mcqs</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>mcqs</name>
     <description>Multiple Choice quiz System (mcqs)</description>
 
