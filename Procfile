@@ -1,1 +1,1 @@
-heroku ps:scale web=1
+web: java -jar target/fireflies-1.0.jar
