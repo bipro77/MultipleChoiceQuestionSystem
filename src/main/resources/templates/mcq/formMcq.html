@@ -1,0 +1,268 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <title> New | MCQS - Multiple Choice Question System</title>
+    <div th:replace="fragments/header.html :: headerCSS" th:remove="tag"> Header CSS </div>
+</head>
+
+<body>
+
+<!-- Start Left menu area -->
+<div th:replace="fragments/leftMenu.html ::  leftMenu" th:remove="tag">  Left Menu </div>
+<!-- End Left menu area -->
+
+<!-- Start Welcome area -->
+<div class="all-content-wrapper">
+    <div th:replace="fragments/header.html :: header" th:remove="tag"> Header </div>
+    <!-- Basic Form Start -->
+    <div class="basic-form-area mg-b-15">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="sparkline12-list">
+                        <div class="sparkline12-hd">
+                            <div class="main-sparkline12-hd">
+                                <h1 th:text="${formName}">Add New MCQ</h1>
+                            </div>
+                        </div>
+                        <div class="sparkline12-graph">
+                            <div class="basic-login-form-ad">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="all-form-element-inner">
+                                            <!--      /*@thymesVar id="mcq" type="com.fireflies.mcqs.model.Mcq"*/-->
+                                            <!--      /*@thymesVar id="mcqCurrent" type="com.fireflies.mcqs.model.Mcq"*/-->
+                                            <form class="form-horizontal"  method="post" th:action="@{/mcq/save}" th:object="${mcq}" >
+                                                <input type="hidden" class="form-control" th:name="${'id'}" th:value="${mcqCurrent != null}? ${mcqCurrent.getId()} : null" />
+                                                <div class="form-group-inner input-with-success">
+                                                    <div class="row">
+                                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                            <label class="login2 pull-right pull-right-pro">QUESTION</label>
+                                                        </div>
+                                                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                            <input type="text" class="form-control" th:name="${'question'}" id="question" onchange="trimText();"
+                                                                   placeholder="insert unique text"
+                                                                   th:value="${mcqCurrent != null}? ${mcqCurrent.getQuestion()} : ''"  required />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group-inner">
+                                                    <div class="row">
+                                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                            <label class="login2 pull-right pull-right-pro">OPTION 1</label>
+                                                        </div>
+                                                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                            <input type="text" class="form-control" id="option1" onkeyup="setOptionValue();" onchange="textUniquenessCheck();trimText();"
+                                                                   placeholder="insert unique text"
+                                                                   th:name="${'option1'}"  th:value="${mcqCurrent != null}? ${mcqCurrent.getOption1()} : ''" required />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group-inner">
+                                                    <div class="row">
+                                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                            <label class="login2 pull-right pull-right-pro">OPTION 2</label>
+                                                        </div>
+                                                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                            <input type="text" class="form-control" id="option2" onkeyup="setOptionValue();" onchange="textUniquenessCheck();trimText();"
+                                                                   placeholder="insert unique text"
+                                                                   th:name="${'option2'}" th:value="${mcqCurrent != null}? ${mcqCurrent.getOption2()} : ''" required />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group-inner">
+                                                    <div class="row">
+                                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                            <label class="login2 pull-right pull-right-pro">OPTION 3</label>
+                                                        </div>
+                                                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                            <input type="text" class="form-control" id="option3" onkeyup="setOptionValue();" onchange="textUniquenessCheck();trimText();"
+                                                                   placeholder="insert unique text"
+                                                                   th:name="${'option3'}" th:value="${mcqCurrent != null}? ${mcqCurrent.getOption3()} : ''"  required />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group-inner">
+                                                    <div class="row">
+                                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                            <label class="login2 pull-right pull-right-pro">OPTION 4</label>
+                                                        </div>
+                                                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                            <input type="text" class="form-control" id="option4" onkeyup="setOptionValue();" onchange="textUniquenessCheck();trimText();"
+                                                                   placeholder="insert unique text"
+                                                                   th:name="${'option4'}" th:value="${mcqCurrent != null}? ${mcqCurrent.getOption4()} : ''"  required />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group-inner input-with-warning">
+                                                    <div class="row">
+                                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                            <label class="login2 pull-right pull-right-pro"> ANSWER </label>
+                                                        </div>
+                                                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                            <div class="form-select-list" >
+                                                                <select class="form-control custom-select-value"   th:name="${'answer'}"   required>
+                                                                    <option value="" >--Please Select--</option>
+                                                                    <option id="opt1" th:selected="${mcqCurrent != null and mcqCurrent.getAnswer() == mcqCurrent.getOption1() }"
+                                                                            th:value="${mcqCurrent != null}? ${mcqCurrent.getOption1()} : '' "> Option 1 </option>
+                                                                    <option id="opt2" th:selected="${mcqCurrent != null and mcqCurrent.getAnswer() == mcqCurrent.getOption2() }"
+                                                                            th:value="${mcqCurrent != null}? ${mcqCurrent.getOption2()} : '' "> Option 2 </option>
+                                                                    <option id="opt3" th:selected="${mcqCurrent != null and mcqCurrent.getAnswer() == mcqCurrent.getOption3() }"
+                                                                            th:value="${mcqCurrent != null}? ${mcqCurrent.getOption3()} : '' "> Option 3 </option>
+                                                                    <option id="opt4" th:selected="${mcqCurrent != null and mcqCurrent.getAnswer() == mcqCurrent.getOption4() }"
+                                                                            th:value="${mcqCurrent != null}? ${mcqCurrent.getOption4()} : '' "> Option 4 </option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group-inner input-with-success">
+                                                    <div class="row">
+                                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                            <label class="login2 pull-right pull-right-pro">QUESTION SET</label>
+                                                        </div>
+                                                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                            <div class="form-select-list" >
+                                                                <select class="form-control custom-select-value" th:name="${'quesSet'}" required >
+                                                                    <option value="" >--Please Select--</option>
+                                                                        <option th:each="set, iter : ${setList}" th:text="${set}" th:value="${set}"  th:selected="${mcqCurrent != null and mcqCurrent.getQuesSet() == set}"></option>
+<!--                                                                    <option value="A" th:selected="${mcqCurrent != null and mcqCurrent.getQuesSet() == 'A'}"> Set A </option>-->
+<!--                                                                    <option value="B" th:selected="${mcqCurrent != null and mcqCurrent.getQuesSet() == 'B'}"> Set B </option>-->
+<!--                                                                    <option value="C" th:selected="${mcqCurrent != null and mcqCurrent.getQuesSet() == 'C'}"> Set C </option>-->
+<!--                                                                    <option value="D" th:selected="${mcqCurrent != null and mcqCurrent.getQuesSet() == 'D'}"> Set D </option>-->
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+<!--                                                th:value="${mcqCurrent != null}? ${mcqCurrent.getStatus()} : ''"-->
+                                                <div class="form-group-inner">
+                                                    <div class="row">
+                                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                                            <label class="login2 pull-right pull-right-pro"><span class="basic-ds-n"> STATUS </span>  </label>
+                                                        </div>
+                                                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                                                            <div class="bt-df-checkbox">
+                                                                <label> &nbsp; Enable <input class="pull-left " type="radio"  th:name="${'status'}" th:value="${'1'}"
+                                                                               th:checked="${mcqCurrent != null and mcqCurrent.getStatus() == 1}" required >  </label>
+                                                                <label style="margin-left:5em">  &nbsp; Disable <input class="pull-left" type="radio" th:name="${'status'}"
+                                                                           th:value="${'0'}"  th:checked="${mcqCurrent != null and mcqCurrent.getStatus() == 0}"  ></label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group-inner">
+                                                    <div class="login-btn-inner">
+                                                        <div class="row">
+                                                            <div class="col-lg-3"></div>
+                                                            <div class="col-lg-9">
+                                                                <div class="login-horizental cancel-wp pull-left form-bc-ele">
+                                                                    <button class="btn btn-white" type="submit">Cancel</button>
+                                                                    <button class="btn btn-sm btn-primary login-submit-cs" id="submit" type="submit">Save MCQ</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Basic Form End-->
+    <div th:replace="fragments/footer.html :: footer" th:remove="tag"> Scripts  </div>
+</div>
+
+<div th:replace="fragments/footer.html :: scriptMain" th:remove="tag"> Scripts  </div>
+<script>
+    function setOptionValue() {
+        document.getElementById('opt1').value = document.getElementById("option1").value;
+        document.getElementById('opt2').value = document.getElementById("option2").value;
+        document.getElementById('opt3').value = document.getElementById("option3").value;
+        document.getElementById('opt4').value = document.getElementById("option4").value;
+        document.getElementsByName('answer')[0].options[1].innerHTML = " Option 1 - [ " + document.getElementById("option1").value + " ]" ;
+        document.getElementsByName('answer')[0].options[2].innerHTML = " Option 2 - [ " + document.getElementById("option2").value + " ]" ;
+        document.getElementsByName('answer')[0].options[3].innerHTML = " Option 3 - [ " + document.getElementById("option3").value + " ]" ;
+        document.getElementsByName('answer')[0].options[4].innerHTML = " Option 4 - [ " + document.getElementById("option4").value + " ]" ;
+
+    }
+
+    function trimText() {
+        document.getElementById('question').value = document.getElementById("question").value.trim();
+        document.getElementById('option1').value = document.getElementById("option1").value.trim();
+        document.getElementById('option2').value = document.getElementById("option2").value.trim();
+        document.getElementById('option3').value = document.getElementById("option3").value.trim();
+        document.getElementById('option4').value = document.getElementById("option4").value.trim();
+    }
+
+    function textUniquenessCheck() {
+        var opt1 = document.getElementById("option1").value.trim().toUpperCase();
+        var opt2 = document.getElementById("option2").value.trim().toUpperCase();
+        var opt3 = document.getElementById("option3").value.trim().toUpperCase();
+        var opt4 = document.getElementById("option4").value.trim().toUpperCase();
+
+        if (opt4.length > 0) {
+            if (opt4.localeCompare(opt1) == 0) {
+                alert(opt4);
+                document.getElementById("option4").value = "";
+            }
+            if (opt4.localeCompare(opt2) == 0) {
+                alert(opt1);
+                document.getElementById("option4").value = "";
+            }
+            if (opt4.localeCompare(opt3) == 0) {
+                alert(opt1);
+                document.getElementById("option4").value = "";
+            }
+        }
+        if (opt3.length > 0) {
+            if (opt3.localeCompare(opt1) == 0) {
+                alert(opt1);
+                document.getElementById("option3").value = "";
+            }
+            if (opt3.localeCompare(opt2) == 0) {
+                alert(opt1);
+                document.getElementById("option3").value = "";
+            }
+        }
+        if (opt2.length > 0) {
+            if (opt2.localeCompare(opt1) == 0) {
+                alert(opt1);
+                document.getElementById("option2").value = "";
+            }
+        }
+    }
+
+    // function submitButtonStatus() {
+    //     var ques = document.getElementById("question").value.trim().toUpperCase();
+    //     var opt1 = document.getElementById("option1").value.trim().toUpperCase();
+    //     var opt2 = document.getElementById("option2").value.trim().toUpperCase();
+    //     var opt3 = document.getElementById("option3").value.trim().toUpperCase();
+    //     var opt4 = document.getElementById("option4").value.trim().toUpperCase();
+    //     if (ques.length > 0 || opt1.length > 0 || opt2.length > 0 || opt3.length > 0 || opt4.length > 0){
+    //         document.getElementById("submit").disabled = false;
+    //     } else {
+    //         document.getElementById("submit").disabled = true;
+    //     }
+    //
+    // }
+
+
+</script>
+</body>
+
+</html>

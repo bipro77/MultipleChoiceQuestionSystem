@@ -1,0 +1,170 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>EXAM | MCQS - Multiple Choice Question System</title>
+    <div th:replace="fragments/header.html :: headerCSS"> header CSS</div>
+</head>
+<body>
+
+<!-- Start Left menu area -->
+<div th:replace="fragments/LeftMenu.html ::  LeftMenu"> Left Menu</div>
+<!-- End Left menu area -->
+<!-- Start Welcome area -->
+<div class="all-content-wrapper">
+    <div th:replace="fragments/header.html ::  header"> Header</div>
+
+    <div class="sparkline12-list responsive-mg-b-30">
+        <!--      /*@thymesVar id="mcqDtoResult" type="java.util.List<com.fireflies.mcqs.dto.McqDto>"*/-->
+        <form class="form-horizontal" method="post" th:action="@{/mcq/result}" th:object="${mcqDtoResult}">
+
+            <div class="static-table-area">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                            <div class="sparkline8-list">
+                                <div class="sparkline8-hd">
+                                    <div class="main-sparkline8-hd">
+                                        <h1>EXAM: QUESTION SET <p th:text="${ set }" th:remove="tag"></p></h1>
+                                        <br>
+                                    </div>
+                                </div>
+                                <div class="sparkline8-graph">
+                                    <div class="static-table-list" style="padding-left: 3%;"
+                                         th:each=" mcq, iter : ${mcqList}">
+
+                                        <input type="hidden" th:value="${ mcq.getId()}"
+                                               th:name="${'resultList['+ iter.index + '].id'}">
+                                        <input type="hidden" th:value="${ mcq.getQuestion()}"
+                                               th:name="${'resultList['+ iter.index + '].question'}">
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th>
+                                                    <i th:utext="${'<b>'+ (iter.index+1) + '</b>.  ' + mcq.getQuestion()}"/>
+                                                </th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td style="padding-left: 2%;">
+                                                    <input type="radio" th:value="${ mcq.getOption1()}"
+                                                           th:name="${'resultList['+ iter.index + '].ansChosen'}"> <i
+                                                        th:utext="${ mcq.getOption1()}"></i></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left: 2%;">
+                                                    <input type="radio" th:value="${ mcq.getOption2()}"
+                                                           th:name="${'resultList['+ iter.index + '].ansChosen'}"> <i
+                                                        th:utext="${ mcq.getOption2()}"></i></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left: 2%;">
+                                                    <input type="radio" th:value="${ mcq.getOption3()}"
+                                                           th:name="${'resultList['+ iter.index + '].ansChosen'}"> <i
+                                                        th:utext="${ mcq.getOption3()}"></i></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left: 2%;">
+                                                    <input type="radio" th:value="${ mcq.getOption4()}"
+                                                           th:name="${'resultList['+ iter.index + '].ansChosen'}"
+                                                           required> <i th:utext="${ mcq.getOption4()}"></i></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <br><br>
+                                    </div> <!--End Loop-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="payment-adress">
+                <button type="submit" class="btn btn-custon-rounded-four btn-success login-submit-cs">Submit</button>
+            </div>
+
+            <!--                <div class="form-group-inner">-->
+            <!--                    <div class="row">-->
+            <!--                        &lt;!&ndash;      /*@thymesVar id="mcqList" type="java.util.List<com.fireflies.mcqs.model.Mcq>"*/&ndash;&gt;-->
+            <!--                        <div th:each=" mcq, iter : ${mcqList}">-->
+            <!--                            <input type="hidden" th:value="${ mcq.getId()}" th:name="${'resultList['+ iter.index + '].id'}">-->
+            <!--                            <input type="hidden" th:value="${ mcq.getQuestion()}" th:name="${'resultList['+ iter.index + '].question'}">-->
+
+            <!--                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">-->
+            <!--                                <label class="pull-left">-->
+            <!--                                    <i th:utext="${'&nbsp; &nbsp;     <b>'+ (iter.index+1) + '</b>.  ' + mcq.getQuestion()}"/>-->
+            <!--                                </label>-->
+            <!--                            </div>-->
+            <!--                            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">-->
+            <!--                                <div class="bt-df-checkbox pull-right-pro">-->
+            <!--    &lt;!&ndash;                                <div th:with="id = ${mcq.getId()}" >&ndash;&gt;-->
+            <!--                                    <div class="row">-->
+            <!--                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">-->
+            <!--                                            <div class="i-checks pull-left">-->
+            <!--                                                <label>-->
+            <!--                                                    <input type="radio" th:value="${ mcq.getOption1()}" th:name="${'resultList['+ iter.index + '].ansChosen'}" > <i th:utext="${ mcq.getOption1()}" ></i>-->
+            <!--                                                </label>-->
+            <!--                                            </div>-->
+            <!--                                        </div>-->
+            <!--                                    </div>-->
+
+            <!--                                    <div class="row">-->
+            <!--                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">-->
+            <!--                                            <div class="i-checks pull-left">-->
+            <!--                                                <label>-->
+            <!--                                                    <input type="radio" th:value="${ mcq.getOption2()}" th:name="${ 'resultList['+ iter.index + '].ansChosen'}"> <i th:utext="${ mcq.getOption2()}"></i>-->
+            <!--                                                </label>-->
+            <!--                                            </div>-->
+            <!--                                        </div>-->
+            <!--                                    </div>-->
+
+            <!--                                    <div class="row">-->
+            <!--                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">-->
+            <!--                                            <div class="i-checks pull-left">-->
+            <!--                                                <label>-->
+            <!--                                                    <input type="radio" th:value="${ mcq.getOption3()}" th:name="${ 'resultList['+ iter.index + '].ansChosen'}"> <i th:utext="${ mcq.getOption3()}"></i>-->
+            <!--                                                </label>-->
+            <!--                                            </div>-->
+            <!--                                        </div>-->
+            <!--                                    </div>-->
+
+            <!--                                    <div class="row">-->
+            <!--                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">-->
+            <!--                                            <div class="i-checks pull-left">-->
+            <!--                                                <label>-->
+            <!--                                                    <input type="radio" th:value="${ mcq.getOption4()}" th:name="${'resultList['+ iter.index + '].ansChosen' }" required> <i th:utext="${ mcq.getOption4()}"></i>-->
+            <!--                                                </label>-->
+            <!--                                            </div>-->
+            <!--                                        </div>-->
+            <!--                                    </div>-->
+
+            <!--                                </div>-->
+            <!--                            </div>-->
+
+
+            <!--                            <p>. <hr style="width:100%;text-align:left;margin-left:0"></p>-->
+            <!--                         </div>-->
+
+
+            <!--                    </div>-->
+            <!--               </div>-->
+            <!--            <input type="text" name="resultList[0].question" value="222222">-->
+            <!--            <input type="text" name="mcqResults[1].quesNo" value="333333">-->
+            <!--            <input th:field="*{mcqResult[0].quesNo}" />-->
+            <!--            <input type="text" th:name="${mcqResult[0].quesNo}" value="333333">-->
+            <!--            <input type="text" th:name="${mcqResult[1].quesNo}" value="222222">-->
+
+
+        </form>
+    </div>
+</div>
+
+<br>
+
+<div th:replace="fragments/footer.html :: footer"> Footer</div>
+<div th:replace="fragments/footer.html :: scriptMain"> Scripts</div>
+</body>
+</html>

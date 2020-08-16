@@ -1,0 +1,93 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title> Result | MCQS - Multiple Choice Question System</title>
+    <div th:replace="fragments/header.html :: headerCSS"> header CSS </div>
+</head>
+
+<body>
+<!-- Start Left menu area -->
+<div th:replace="fragments/leftMenu.html ::  leftMenu" th:remove="tag">  Left Menu </div>
+<!-- End Left menu area -->
+<!-- Start Welcome area -->
+<div class="all-content-wrapper">
+    <div th:include="fragments/header.html ::  header">   Header </div>
+
+    <div class="data-table-area mg-b-15">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="sparkline16-list">
+                        <div class="sparkline13-hd">
+                            <div class="main-sparkline13-hd">
+                                <h1>MCQ <span class="table-project-n">Result </span> Table
+                                    <!--      /*@thymesVar id="correctCount" type="java.lang.Integer"*/-->
+                                    <!--      /*@thymesVar id="quesCount" type="java.lang.Integer"*/-->
+                                    <b> <i class="pull-right"  th:text="${' Correct Answers '+ correctCount + ' out of ' + quesCount + ' Questions'}"
+                                           style="font-size:25px; color: #0E993C">< </i> </b></h1>
+                            </div>
+                        </div>
+                        <div class="sparkline13-graph">
+                            <div class="datatable-dashv1-list custom-datatable-overright">
+                                <div id="toolbar">
+                                    <select class="form-control dt-tb">
+                                        <option value="">Export Basic</option>
+                                        <option value="all">Export All</option>
+                                        <option value="selected">Export Selected</option>
+                                    </select>
+                                </div>
+                                <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true"
+                                       data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true"
+                                       data-resizable="true" data-cookie="true"
+                                       data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
+                                    <thead>
+                                    <tr>
+                                        <th data-field="state" data-checkbox="true"></th>
+                                        <th data-field="id">SERIAL NO.</th>
+                                        <th data-field="question" data-editable="true">QUESTION</th>
+                                        <th data-field="correctAnswer" >CORRECT ANSWER</th>
+                                        <th data-field="chosenAnswer" >CHOSEN ANSWER</th>
+                                        <th data-field="result">RESULT</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    <!--      /*@thymesVar id="mcqDtoResult" type="java.util.List<com.fireflies.mcqs.dto.McqDto>"*/-->
+                                            <tr th:each=" mcqDto, iter : ${mcqDtoResult}">
+                                                <td></td>
+                                                <td th:text="${ iter.index+1 }" > </td>
+                                                <td th:text="${ mcqDto.getQuestion() }" > </td>
+                                                <td th:text="${ mcqDto.getAnsCorrect() }" > </td>
+                                                <td th:text="${ mcqDto.getAnsChosen() }" > </td>
+                                                <div th:if="${ mcqDto.isAnsFlag() == true }">
+                                                    <td > <i class="glyphicon glyphicon-ok" style="font-size:25px;color:limegreen"></i> </td>
+                                                </div>
+                                                <div th:if="${ mcqDto.isAnsFlag() == false }">
+                                                    <td> <i class="glyphicon glyphicon-remove" style="font-size:25px;color:red"></i> </td>
+                                                </div>
+                                            </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div th:include="fragments/footer.html :: footer"> Footer </div>
+</div>
+
+<div th:include="fragments/footer.html :: scriptMain"> Scripts  </div>
+<div th:include="fragments/footer.html :: scriptDataTable"> Data Table  </div>
+</body>
+
+</html>

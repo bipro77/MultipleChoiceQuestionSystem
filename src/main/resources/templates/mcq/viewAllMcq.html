@@ -1,0 +1,128 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>Home | MCQS - Multiple Choice Question System</title>
+    <div th:replace="fragments/header.html :: headerCSS" th:remove="tag"> Header CSS</div>
+</head>
+
+<body>
+<!-- Start Left menu area -->
+<div th:replace="fragments/leftMenu.html :: leftMenu" th:remove="tag"> Left Menu</div>
+<!-- End Left menu area -->
+
+<!-- Start Welcome area -->
+<div class="all-content-wrapper">
+    <div th:replace="fragments/header.html :: header" th:remove="tag"> Header</div>
+
+
+    <div class="data-table-area mg-b-15">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="product-status-wrap">
+                    <div class="sparkline16-list">
+                        <div class="sparkline13-hd">
+                            <div class="main-sparkline13-hd">
+                                <h1>MCQ <span class="table-project-n"> </span> List
+                                    <b> <a th:href="@{/mcq/new}" class="btn btn-primary pull-right"  th:text="${'Add New MCQ'}"
+                                           style="font-size:15px; color: #ffffff">< </a> </b>
+                                </h1>
+                            </div>
+                        </div>
+                        <div class="sparkline13-graph">
+                            <div class="datatable-dashv1-list custom-datatable-overright">
+                                <div id="toolbar">
+                                    <select class="form-control dt-tb">
+                                        <option value="">Export Basic</option>
+                                        <option value="all">Export All</option>
+                                        <option value="selected">Export Selected</option>
+                                    </select>
+                                </div>
+                                <table id="table" data-toggle="table" data-pagination="true" data-search="true"
+                                       data-show-columns="true"
+                                       data-show-pagination-switch="true" data-show-refresh="true"
+                                       data-key-events="true" data-show-toggle="true"
+                                       data-resizable="true" data-cookie="true"
+                                       data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true"
+                                       data-toolbar="#toolbar" >
+                                    <thead>
+                                    <tr>
+<!--                                        data-editable="true"-->
+                                        <th data-checkbox="true"></th>
+                                        <th data-field="SerialNo"  >Serial No.</th>
+                                        <th data-field="question" >Question</th>
+                                        <th data-field="answer" >Answer</th>
+                                        <th data-field="option1" >Option 1</th>
+                                        <th data-field="option2" >Option 2</th>
+                                        <th data-field="option3" >Option 3</th>
+                                        <th data-field="option4" >Option 4</th>
+                                        <th data-field="quesSet" >Question Set</th>
+                                        <th data-field="status">Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                        <!--      /*@thymesVar id="mcqList" type="java.util.List<com.fireflies.mcqs.model.Mcq> "*/-->
+                        <!--      /*@thymesVar id="" type="com.fireflies.mcqs.model.Mcq"*/-->
+                                    <tr th:each=" mcq, iter : ${mcqList}">
+                                        <td></td>
+                                        <td th:text="${ iter.index+1 }"></td>
+                                        <td th:text="${ mcq.getQuestion() }"></td>
+                                        <td th:text="${ mcq.getAnswer() }"></td>
+                                        <td th:text="${ mcq.getOption1() }"></td>
+                                        <td th:text="${ mcq.getOption2() }"></td>
+                                        <td th:text="${ mcq.getOption3() }"></td>
+                                        <td th:text="${ mcq.getOption4() }"></td>
+                                        <td th:text="${ mcq.getQuesSet() }"></td>
+                                        <!--                                        <td th:text="${ mcq.getStatus() }" > </td>-->
+
+                                        <div th:if="${ mcq.getStatus() == 1 }">      <!--     <td th:text="${ 'Active' }" > </td>-->
+                                            <td>
+<!--                                                <a class="btn btn-white">Active</a>-->
+                                                <a th:href="@{'/mcq/statusToggle/'+${mcq.getId()}}"
+                                                   class="pd-setting"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i> Enabled </a>
+                                            </td>
+                                        </div>
+                                        <div th:if="${ mcq.getStatus() == 0 }">        <!--        <td th:text="${ 'Disable' }" > </td>-->
+                                            <td>
+                                                <a th:href="@{'/mcq/statusToggle/'+${mcq.getId()}}"
+                                                   class="ds-setting"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Disabled </a>
+                                            </td>
+                                        </div>
+
+                                        <!--  <td> <i class="glyphicon glyphicon-remove" style="font-size:25px;color:red"></i> </td>-->
+
+                                        <td>
+                                            <a th:href="@{'/mcq/update/'+${mcq.getId()}}"
+                                               data-toggle="tooltip" title="Edit" class="btn btn-success">
+                                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                            <a th:href="@{'/mcq/delete/'+${mcq.getId()}}"  onclick="return confirm('DELETE! Are you sure?')"
+                                               data-toggle="tooltip" title="Trash" class="btn btn-danger">
+                                                <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div th:replace="fragments/footer.html :: footer" th:remove="tag"> Footer</div>
+</div>
+
+<div th:replace="fragments/footer.html :: scriptMain" th:remove="tag"> Scripts</div>
+<div th:replace="fragments/footer.html :: scriptDataTable" th:remove="tag"> Scripts</div>
+</body>
+
+</html>
