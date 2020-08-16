@@ -1,31 +1,31 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
-      xmlns:th="http://www.thymeleaf.org">
-<head>
-</head>
-<body>
+<!--<!DOCTYPE html>-->
+<!--<html xmlns="http://www.w3.org/1999/xhtml"-->
+<!--      xmlns:th="http://www.thymeleaf.org"-->
+<!--      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">-->
+<!--<head>-->
+<!--</head>-->
+<!--<body>-->
 
-Hello home
-<div th:fragment="footer">
+<!--Hello home-->
+<!--<div th:fragment="footer">-->
 
-    <div class="container">
+<!--    <div class="container">-->
 
-        <footer>
-            <!-- this is footer -->
-            &copy; 2017 mkyong.com
-            <span sec:authorize="isAuthenticated()">
-                | Logged user: <span sec:authentication="name"></span> |
-                Roles: <span sec:authentication="principal.authorities"></span> |
-                <a th:href="@{/logout}">Sign Out</a>
-            </span>
+<!--        <footer>-->
+<!--            &lt;!&ndash; this is footer &ndash;&gt;-->
+<!--            &copy; 2017 mkyong.com-->
+<!--            <span sec:authorize="isAuthenticated()">-->
+<!--                | Logged user: <span sec:authentication="name"></span> |-->
+<!--                Roles: <span sec:authentication="principal.authorities"></span> |-->
+<!--                <a th:href="@{/logout}">Sign Out</a>-->
+<!--            </span>-->
 
-            <script src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"
-                    type="text/javascript"></script>
+<!--            <script type="text/javascript"-->
+<!--                    src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
 
-        </footer>
-    </div>
+<!--        </footer>-->
+<!--    </div>-->
 
-</div>
-</body>
-</html>
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
