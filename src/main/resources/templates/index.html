@@ -1,0 +1,42 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home | MCQS - Multiple Choice Question System</title>
+    <div th:replace="fragments/header.html :: headerCSS" th:remove="tag"> header CSS </div>
+</head>
+
+<body>
+    <!--[if lt IE 8]>
+		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+	<![endif]-->
+
+
+    <!-- Start Left menu area -->
+    <div th:replace="fragments/leftMenu.html ::  leftMenu" th:remove="tag">  Left Menu </div>
+    <!-- End Left menu area -->
+    <!-- Start Welcome area -->
+    <div class="all-content-wrapper">
+        <div th:replace="fragments/header.html ::  header" th:remove="tag">   Header </div>
+
+
+        Your Home
+
+
+
+        <div th:replace="fragments/footer.html :: footer" th:remove="tag"> Footer </div>
+    </div> <!--  END of  all-content-wrapper-->
+    <div th:replace="fragments/footer.html :: scriptMain" th:remove="tag"> Scripts  </div>
+    <script th:inline="javascript">
+        // // var usernameList = [[${usernameList}]];
+        // window.onload = function() {
+        //     // Code here
+        //
+        //     var usernameList = window.location.href='/usernames'
+        //     alert(usernameList);
+        // }
+    </script>
+</body>
+
+</html>
