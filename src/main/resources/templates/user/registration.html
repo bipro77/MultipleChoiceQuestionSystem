@@ -206,14 +206,16 @@
         // javascript:history.back();
     }
 
-    function usernameCheck(username) {
+    function usernameCheck(domUsername) {
+        var username = domUsername.value.trim().toLowerCase();
+        // alert("|"+username+"|")
         var msg = "";
         if (document.getElementById('username').value == "" ) {
             document.getElementById("usernameMsg").innerHTML = msg;
             return;
         }
         var usernameList = [[${usernameList}]];
-        if ( usernameList.includes(username.value)){
+        if ( usernameList.includes(username)){
             msg = "NOT AVAILABLE" ;
             // document.getElementById("usernameMsg").innerHTML = msg;
             document.getElementById('submit').disabled = true;
@@ -225,13 +227,14 @@
             document.getElementById("usernameMsg").style.color = "green";
         }
 
-        if (username.value.length <= 6  ) {
+        if (username.length <= 6  ) {
             msg = "At least 6 characters";
             document.getElementById('submit').disabled = true;
             document.getElementById("usernameMsg").style.color = "red";
         }
 
         document.getElementById("usernameMsg").innerHTML = msg;
+        document.getElementById("username").value = username;
 
     }
 

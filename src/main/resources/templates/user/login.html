@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="en"  xmlns:th="http://www.thymeleaf.org">
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -64,34 +64,35 @@
 <body>
 
 <!--[if lt IE 8]>
-<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
 <![endif]-->
 <div class="error-pagewrap">
     <div class="error-page-int">
         <div class="text-center m-b-md custom-login">
-<!--            <h3>PLEASE LOGIN TO APP</h3>-->
+            <!--            <h3>PLEASE LOGIN TO APP</h3>-->
             <h2>LOGIN</h2>
-            <p> <a th:href="@{/}"> <i> <h4>Multiple Choice Question System</h4>   Click here to <b>Homepage</b></i> </a></p>
+            <p><a th:href="@{/}"> <i><h4>Multiple Choice Question System</h4> Click here to <b>Homepage</b></i> </a></p>
 
-            <div class="alert alert-danger" th:if="${errorMessage != null}" >
+            <div class="alert alert-danger" th:if="${errorMessage != null}">
                 <!--/*@thymesVar id="errorMessage" type=""*/-->
                 <div th:text="${errorMessage}" th:remove="tag"></div>
-    <!--            <div th:if="${param.error}">-->
-    <!--                    Invalid username and password.-->
-    <!--                    <span th:text="'Hello, ' + ${error}"></span>-->
-    <!--                </div>-->
+                <!--            <div th:if="${param.error}">-->
+                <!--                    Invalid username and password.-->
+                <!--                    <span th:text="'Hello, ' + ${error}"></span>-->
+                <!--                </div>-->
             </div>
             <!--/*@thymesVar id="message" type=""*/-->
             <div th:if="${param.logout != null or message != null}">
-                <div class="alert alert-info" >
+                <div class="alert alert-info">
 
                     <div th:text="${message}" th:remove="tag"></div>
-<!--                    You have been logged out.-->
-<!--                    <br>-->
-<!--                    <a th:href="@{/}"> <i> Click here to <b>Homepage</b></i> </a>-->
+                    <!--                    You have been logged out.-->
+                    <!--                    <br>-->
+                    <!--                    <a th:href="@{/}"> <i> Click here to <b>Homepage</b></i> </a>-->
                 </div>
             </div>
-<!--            <p>This is the best app ever!</p>-->
+            <!--            <p>This is the best app ever!</p>-->
         </div>
         <div class="content-error">
             <div class="hpanel">
@@ -99,12 +100,19 @@
                     <form th:action="@{/login}" method="post">
                         <div class="form-group">
                             <label class="control-label" for="username">Username</label>
-                            <input type="text" placeholder="Username" title="Please enter you username" required="" value="" name="username" id="username" class="form-control">
-                            <span class="help-block small">Your Unique Username</span>
+                            <input type="text" placeholder="Username" title="Please enter you username" required=""
+                                   value="" name="username" id="username" onkeyup="usernameCheck(this);"
+                                   class="form-control">
+                            <!--                            <span class="help-block small">Your Unique Username</span>-->
+                            <b><i>
+                                <div id="usernameMsg"></div>
+                            </i></b>
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="password">Password</label>
-                            <input type="password" title="Please enter your password" placeholder="******" required="" value="" name="password" id="password" class="form-control">
+                            <input type="password"  placeholder="******" required=""
+                                   value="" name="password" id="password" class="form-control"
+                                   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" >
                             <span class="help-block small">Your strong password</span>
                         </div>
                         <div class="checkbox login-checkbox">
@@ -113,15 +121,56 @@
                             <p class="help-block small">(if this is a private computer)</p>
                         </div>
                         <button class="btn btn-success btn-block loginbtn">LOGIN</button>
-                        <button type="button" class="btn btn-default btn-block"  onclick="window.location.href='/registration'" >CREATE ACCOUNT</button>
+                        <button type="button" class="btn btn-default btn-block"
+                                onclick="window.location.href='/registration'">CREATE ACCOUNT
+                        </button>
                     </form>
                 </div>
             </div>
         </div>
-        <div th:include="fragments/footer.html :: loginFooter"> Footer </div>
+        <div th:include="fragments/footer.html :: loginFooter"> Footer</div>
     </div>
 </div>
 
+<script>
+    function usernameCheck(domUsername) {
+        var username = domUsername.value.trim().toLowerCase();
+        document.getElementById("username").value = username;
+        // alert("|"+username+"|");
+        var msg = "At least 6 characters";
+        document.getElementById("usernameMsg").innerHTML = msg;
+        document.getElementById("usernameMsg").style.color = "red";
+
+        if (username.length > 6) {
+            msg = "Your Unique Username";
+            document.getElementById("usernameMsg").innerHTML = msg;
+            document.getElementById("usernameMsg").style.color = "green";
+            return;
+        }
+
+        // var usernameList = [[${usernameList}]];
+        //     if ( usernameList.includes(username)){
+        //         msg = "NOT AVAILABLE" ;
+        //         // document.getElementById("usernameMsg").innerHTML = msg;
+        //         document.getElementById('submit').disabled = true;
+        //         document.getElementById("usernameMsg").style.color = "red";
+        //     } else{
+        //         msg = "AVAILABLE" ;
+        //         // document.getElementById("usernameMsg").innerHTML = msg;
+        //         document.getElementById('submit').disabled = false;
+        //         document.getElementById("usernameMsg").style.color = "green";
+        //     }
+
+
+        // alert("|"+username+"|");
+        //
+
+
+        document.getElementById("username").value = username;
+        // alert("|"+username+"|");
+        //
+    }
+</script>
 
 <!-- jquery
     ============================================ -->

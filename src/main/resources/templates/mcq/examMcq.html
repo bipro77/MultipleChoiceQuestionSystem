@@ -22,7 +22,7 @@
             padding: 8px;
             word-wrap:break-spaces;
             /*line-height: 300%;*/
-            height: 300%;
+            /*height: 300%;*/
             vertical-align: top;
             font-size: 20px;
         }
@@ -79,7 +79,7 @@
                                             <input type="hidden" th:value="${ mcq.getQuestion()}"
                                                    th:name="${'resultList['+ iter.index + '].question'}">
 
-                                            <td style="height:100px;"><b> <i th:utext="${'<b>'+ (iter.index+1) + '</b>. &nbsp; ' + mcq.getQuestion()}"/></b></td>
+                                            <td style="height:120px;"><b> <i th:utext="${'<b>'+ (iter.index+1) + '</b>. &nbsp; ' + mcq.getQuestion()}"/></b></td>
                                             <td> <input type="radio" th:value="${ mcq.getOption1()}"
                                                         th:name="${'resultList['+ iter.index + '].ansChosen'}"> <i
                                                     th:utext="${ mcq.getOption1()}"></i>
