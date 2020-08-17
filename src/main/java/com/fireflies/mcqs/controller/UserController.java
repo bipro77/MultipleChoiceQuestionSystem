@@ -73,7 +73,8 @@ public class UserController {
 
 //    @ResponseBody
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String registration(@ModelAttribute("userDtoForm") UserDto userDtoForm, BindingResult bindingResult, Model model) {
+    public String registration(@ModelAttribute("userDtoForm") UserDto userDtoForm, BindingResult bindingResult,
+                               Model model, RedirectAttributes redirectAttributes) {
         User user = new User();
         user.setFullName(userDtoForm.getFullName());
         user.setUsername(userDtoForm.getUsername());
@@ -100,7 +101,8 @@ public class UserController {
         }
         userService.save(user);
 //        securityService.autologin(userForm.getUsername(), userForm.getPasswordConfirm());
-        return "redirect:/";
+        redirectAttributes.addFlashAttribute("message", "Registration Successful, Please Login");
+        return "redirect:/login";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)

@@ -81,13 +81,14 @@
     <!--                    <span th:text="'Hello, ' + ${error}"></span>-->
     <!--                </div>-->
             </div>
-            <div th:if="${param.logout}">
+            <!--/*@thymesVar id="message" type=""*/-->
+            <div th:if="${param.logout != null or message != null}">
                 <div class="alert alert-info" >
-                    <!--/*@thymesVar id="message" type=""*/-->
+
                     <div th:text="${message}" th:remove="tag"></div>
 <!--                    You have been logged out.-->
-                    <br>
-                    <a th:href="@{/}"> <i> Click here to <b>Homepage</b></i> </a>
+<!--                    <br>-->
+<!--                    <a th:href="@{/}"> <i> Click here to <b>Homepage</b></i> </a>-->
                 </div>
             </div>
 <!--            <p>This is the best app ever!</p>-->
