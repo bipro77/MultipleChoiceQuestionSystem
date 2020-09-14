@@ -9,15 +9,22 @@ public class Mcq implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+
     private String question;
+
     private String answer;
+
     private String option1;
+
     private String option2;
+
     private String option3;
+
     private String option4;
 
     @Column(name = "ques_set")
     private String quesSet;
+
     private Integer status;
 
     public Integer getId() {

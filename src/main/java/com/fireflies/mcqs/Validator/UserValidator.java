@@ -32,7 +32,7 @@ public class UserValidator implements Validator {
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "NotEmpty");
         if (user.getUsername().length() < 6 || user.getUsername().length() > 32) {
-            errors.rejectValue("username", "Size.userForm.username");
+            errors.rejectValue("username", "Size.userForm.user]-name");
 //            ObjectError error = new Error("email","An account already exists for this email.");
 //            bindingResult.addError( new Error("email","An account already exists for this email."));
         }

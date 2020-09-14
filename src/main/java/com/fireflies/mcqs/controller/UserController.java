@@ -313,9 +313,9 @@ public class UserController {
         return "index.html";
     }
 
-    @RequestMapping(value = {"/home"}, method = RequestMethod.GET)
-    public String welcome1(Model model) {
-
-        return "home.html";
-    }
+//    @RequestMapping(value = {"/home"}, method = RequestMethod.GET)
+//    public String welcome1(Model model) {
+//
+//        return "home.html";
+//    }
 }

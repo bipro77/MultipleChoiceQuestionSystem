@@ -141,7 +141,7 @@ public class McqController {
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
-    public String save(@ModelAttribute("mcq") Mcq mcq, BindingResult bindingResult, Model model) {
+    public String save(@ModelAttribute("mcq") Mcq mcq, BindingResult bindingResult, Model model, HttpSession session) {
         if (bindingResult.hasErrors()) {
             for(ObjectError objectError : bindingResult.getAllErrors()){
                 System.out.println("\nMessage : "+objectError.getDefaultMessage()+"\nToString : "+objectError.toString());
@@ -163,17 +163,17 @@ public class McqController {
             mcqCurrent.setStatus(mcq.getStatus());
             mcqService.save(mcqCurrent);
         }
+        session.setAttribute("quesSetList", mcqService.findDistinctQuesSet()); // Update in Session, Set List
 //        return "mcq/viewAllMcq.html";  return "redirect:/emp/profile/"+employee.getId();
         return "redirect:/mcq/viewAll";
     }
 
     @RequestMapping(value = {"/update/{id}"}, method = RequestMethod.GET)
-    public String update(@PathVariable("id") String id, ModelMap model,HttpServletRequest request) {
+    public String update(@PathVariable("id") String id, ModelMap model,HttpServletRequest request, HttpSession session) {
         Mcq mcq = mcqService.findAllById(Integer.parseInt(id));
         model.addAttribute("mcqCurrent", mcq); // Also Edit flag
         model.addAttribute("formName", "Edit MCQ");
 //        model.addAttribute("setList", mcqService.findDistinctQuesSet());
-        HttpSession session = request.getSession(false);
         session.setAttribute("quesSetList", mcqService.findDistinctQuesSet()); // Update in Session, Set List
         model.addAttribute("setList",  Arrays.asList("A", "B", "C", "D"));
         return "mcq/formMcq.html";
@@ -197,4 +197,10 @@ public class McqController {
         mcqService.save(mcq);
         return "redirect:/mcq/viewAll";
     }
+
+//    @RequestMapping(value = {"/viewResult/{id}"}, method = RequestMethod.GET)
+//    public String viewExamResult(@PathVariable("id") String id, ModelMap model) {
+////        Mcq mcq = mcqService.findAllById(Integer.parseInt(id));
+//        return "redirect:/mcq/viewMcqResult";
+//    }
 }
